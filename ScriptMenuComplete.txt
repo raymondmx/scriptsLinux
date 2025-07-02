@@ -1,0 +1,208 @@
+Hoja de respuestas
+
+
+#!/bin/bash
+#Script de Linux
+clear
+#comprobar el usuario.
+if [ $(whoami) != "root" ]; then
+   echo "debes de ser yo para poder ejecutar este script"
+   echo "Para entrar como yo usa el comando su"
+  exit 1
+fi
+
+#Presentacion
+
+echo
+echo "Script de Linux"
+echo "---------------------------------------"
+
+#Menu de Administracion
+while [ "$opcion" != "0" ]
+do
+
+#Mostramos el menu
+echo
+echo "M E N U-COMANDOS ADMINISTRATIVOS DE S.O."
+echo "Ramon Cuevas Martinez"
+echo "_____________________________________________"
+echo "      1.Mostrar Caracteristicas del Hardware"
+echo "      2.Mostrar Caracteristicas de Video"
+echo "      3.Mostrar Caracteristicas de Audio"
+echo "      4.Mostrar Dispositivos PCI y USB"
+echo "      5.Ver datos de arranque del sistema"
+echo "      6.Datos de Redes Locales"
+echo "      7.Mostrar particiones y espacio en Disco"
+echo "      8.Ver Datos De la Memoria"
+echo "      9.Traer Archivos via ftp"
+echo "     10.Crear Backup Automatico"
+echo "     11.Usuarios En Red"
+echo "     12.Mostrar Procesos en CPU"
+echo "     13.Mostrar Distribucion"
+echo "     14.Mostrar Tabla ASCII"
+
+echo "      0.Salir"
+echo
+echo -n "   Elige una Opcion: "
+read opcion
+
+case $opcion in
+
+        1)
+clear
+echo
+iostat
+echo "________________________________________________________________________"
+echo "HARDWARE DEL EQUIPO"
+sleep 5
+clear
+
+cat /proc/cpuinfo
+echo "________________________________________________________________________"
+echo "HARDWARE DEL EQUIPO"
+sleep 5
+clear
+;;
+
+        2)
+clear
+echo
+lspci | grep -i vga
+echo "_________________________________________________________________________"
+echo "CARACTERISTICAS VIDEO"
+sleep 5
+clear
+echo
+;;
+
+         3)
+clear
+echo
+lspci | grep -i audio
+echo "_________________________________________________________________________"
+echo "CARACTERISTICAS DE AUDIO"
+sleep 5
+clear
+echo
+;;
+
+         4)
+clear
+echo
+lspci -tv
+echo "____________________________________________________________________________"
+echo "Dispositivos PCI"
+sleep 5
+clear
+lsusb -tv
+echo "_____________________________________________________________________________"
+echo "Dispositivios USB"
+sleep 5
+clear
+echo
+;;
+  
+         5)
+clear
+echo
+uptime
+who -b
+echo "ULTIMO DIA DE ARRANQUE DEL SISTEMA"
+echo "__________________________________"
+date
+echo "__________________________________"
+echo "HOY"
+sleep 10
+clear
+echo
+;;
+
+          6)
+clear
+echo
+ifconfig eth0
+echo "_______________________________________________________________________________"
+echo "CONFIGURACION TARJETA DE RED"
+sleep 10
+clear
+echo "q para salir" "ESTADISTICAS DE TRAFICO"
+sleep 2
+nload
+sleep 1	
+clear
+echo
+;;
+
+          7)
+clear
+echo
+df -T
+echo "__________________________________"
+echo "PARTICIONES MONTADAS"
+sleep 8
+clear
+echo
+;;
+
+          8)
+clear
+echo
+cat /proc/meminfo | more
+echo "__________________________________"
+echo " USO DE MEMORIA "
+sleep 5
+clear
+echo
+;;
+
+
+
+          9)
+clear
+echo
+sh traer
+#insertar el script ftp para traer (mget) archivos 
+echo
+;;
+
+
+         10)
+clear
+echo
+#insertar el scrip de backup
+echo
+;;
+
+
+         11)
+clear
+echo
+finger
+echo  "________________________________________________________________________"
+echo  "USUARIOS EN RED"
+sleep 5
+clear
+echo
+;;
+
+        12)
+clear
+top
+echo  "________________________________________________________________________"
+echo  "PROCESOS EN CPU POR LINUX"
+
+clear
+echo
+;;
+
+
+esac
+clear
+done
+     
+echo
+echo "    Hasta Pronto!"
+echo "  ----------------"
+echo
+exit 0
+
